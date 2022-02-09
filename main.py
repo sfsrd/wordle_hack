@@ -8,7 +8,10 @@ def check_letter(word, letter):
     return letter in word
 
 def generate_word(dictionary):
-    return dictionary[random.randint(0, len(dictionary)-1)]
+    word = ''
+    while (len(set(word)) != 5):
+        word = dictionary[random.randint(0, len(dictionary)-1)]
+    return str(word)
 
 def play():
     dictionary = d.get_dictionary()

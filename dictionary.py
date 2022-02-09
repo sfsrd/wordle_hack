@@ -7,7 +7,8 @@ def get_dictionary():
 
     dict = words.words()
     dict = [ word for word in dict if len(word)==5 ]
-    dict =  [word.lower() for word in dict]
+    dict =  [ word.lower() for word in dict ]
+    dict  = list(set(dict))
     return dict
 
 dict = get_dictionary()
