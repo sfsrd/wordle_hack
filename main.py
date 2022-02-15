@@ -19,22 +19,37 @@ def play():
     word_gen = generate_word(dictionary)
     print('Generated word: ', word_gen)
     
+    # list which includes letters that are in the word
+    letters = []
+    
     while True:
         word_gen = input('Enter word: ')
         flags = input('Enter flags: ')
         i = 0
+        
         for flag in flags:
             # g - green - is in the word in this position
             # y - yellow - is in the word, wrong position
             # r - red - is not in the word
+
             if flag == 'g':
                 dictionary = [ word for word in dictionary if check_letter_position(word, word_gen[i], i) ]
+                letters.append(word_gen[i])
             if flag == 'y':
                 dictionary = [ word for word in dictionary if (check_letter(word, word_gen[i])) ]
                 dictionary = [ word for word in dictionary if not(check_letter_position(word, word_gen[i], i)) ]
+                letters.append(word_gen[i])
+            
+            i+=1
+        
+        i=0
+        for flag in flags:
             if flag == 'r':
+                if word_gen[i] in letters:
+                    continue
                 dictionary = [ word for word in dictionary if not(check_letter(word, word_gen[i]))]
-            i = i+1
+            i+=1
+            
         print('Try this: ', dictionary)
     
 play()
